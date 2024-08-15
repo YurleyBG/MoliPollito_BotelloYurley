@@ -105,9 +105,9 @@
                         "precio": 9000
                     }
                 ],
-                "estado": "servido"
+                "estado": "servido",
+                "nuevo_estado": " pagado"
             }
-            
         ]
     }
 ]

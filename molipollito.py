@@ -1,5 +1,6 @@
-import json
-
+import json#importar json
+import time#importar hora 
+#abrir json y guardar
 def abrirmenu():
     file=[]
     with open("menu.json", encoding="utf-8") as data:
@@ -15,9 +16,8 @@ def abrirpedidos():
         return files
     
 def guardarArchivo(midato):
-    with open("pagos.json", "w") as file:
-        json.dump(midato,file)
-
+    with open("pedidos.json", "w") as file:
+        json.dump(midato,file,)
 
 def abrirpagos():
     fua=[]
@@ -27,10 +27,10 @@ def abrirpagos():
         return fua
     
 def guardarpagos(miguar):
-    with open("pedidos.json", "w") as fil:
+    with open("pagos.json", "w") as fil:
         json.dump(miguar,fil)
 
-info=abrirmenu()
+#menus
 def menucomida():
     print("===========MENÚ===============\n"
     "1. Entrada\n"
@@ -54,11 +54,11 @@ datoss=abrirpedidos()
 info=abrirmenu()
 bool=True
 while bool==True:
-    menuopciones()
+    menuopciones()#abre el menu de opciones
     print("Escoja la opción a la que desea acceder:")
     opc=int(input())
     
-    if opc==1:
+    if opc==1:#primera opcion registros de pedidos
         print("========REGISTRAR PEDIDOS==========")
         cliente=input("ingrese el nombre: ")
         print("Este es nuestro menú, Elige la opción de la que deseas realizar tu pedido: ")
@@ -66,7 +66,7 @@ while bool==True:
         while kameha==True:
             menucomida()
             print("")
-            info=abrirmenu()
+            info=abrirmenu()#muestra un menu con las opciones en este
             print("elige una opción ")
             choose=int(input())
             print("")
@@ -98,9 +98,6 @@ while bool==True:
                         print("regresando al menu principal....")
                         eleccion=False
                         kameha=False
-                    
-            
-           
                 if choose==2:
                     print("======PLATO FUERTE======")
                     for i in info[0]["plato_fuerte"]:
@@ -156,13 +153,13 @@ while bool==True:
                     print("regresando al menú principal...")
                     eleccion=False
                     kameha=False
-            datoss[0]["pedidos"].append({"cliente":cliente,"items":[{"categoria": categoria,"nombre":nombre,"precio":precio  }],"estado":estado})
-            guardarArchivo(datoss)         
-            print("Su registro a sido exitoso!")
-    if opc==2:
+                datoss[0]["pedidos"].append({"cliente":cliente,"items":[{"categoria": categoria,"nombre":nombre,"precio":precio  }],"estado":estado})
+                guardarArchivo(datoss)         
+                print("Su registro a sido exitoso!")
+    if opc==2:#opción 2 esicion de pedido
         print("========EDITAR PEDIDOS===========")
         print("")
-        print("Escribe el nombre de la persona de la cual estas buscando los pedidos:")
+        print("Escribe el nombre de la persona de la cual estas buscando para modificar su estado:")
         pcliente=input()
         for i in datoss[0][ "pedidos"]:
             if pcliente==i["cliente"]:
@@ -178,19 +175,46 @@ while bool==True:
                     print("")
                     pedido=False  
                     bool=True
+                    newestado=input("ingresa el nuevo estado:" )
+                    i["nuevo_estado"]=newestado
+                    guardarArchivo(datoss)
+               
+ 
+                
         if pcliente!=i["cliente"]:  
             print("")
             print("No se encuentra registro de algun cliente con este nombre ")
             print("Intentalo de nuevo...")
             print("")
             pedido=True           
-    if opc==3:
-        print("========REGISTRAR PAGO===========")
-        for i in pago[0]["pagos"]:
-            cliente=input("ingrese el nombre del cliente: ")
+    if opc==3:#opcion de registro de pagos
+        new=True
+        while new==True:
+            print("========REGISTRAR PAGO===========")
+            for i in pago[0]["pagos"]:
+                fecha_cadena = time.localtime()
+                fecha_struct = time.strftime("%Y-%m-%d %H:%M:%S", fecha_cadena)
+                cliente=input("Ingrese el nombre del cliente: ")
+                valort=input("Ingrese el valor total de la compra: ")
+                Fecha=fecha_struct
         
+                pago[0]["pagos"].append({"cliente":cliente, "total":valort, "fecha_pago":Fecha})
+                guardarArchivo(pago)         
+                print("Su registro a sido exitoso!")
+                print("")
+                print("Desea Registrar algo más de lo contrario escriba(exit)para abandonar esta opción: ")
+                exit=input()
+                if exit=="exit":
+                    print("")
+                    print("Regresando al menu princial...")
+                    bool=True
+                    new=False
+                    break
+                if exit!="exit":
+                    new=True
+                    break
 
-    if opc==4:
+    if opc==4:#opcion de consulta de pedidos de manera individual o todo
            
            pedido=True
            while pedido==True:
@@ -234,11 +258,11 @@ while bool==True:
                         print("Intentalo de nuevo...")
                         print("")
                         pedido=True           
-    if opc==5:
+    if opc==5:#finalizar programa
         print("Tü has finalizado el programa")
         print("Cerrando programa...")
         bool=False
        
-                
+#Esto fue desarrollado por yurley botello     
        
         
