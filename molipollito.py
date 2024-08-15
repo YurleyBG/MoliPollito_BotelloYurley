@@ -63,6 +63,7 @@ while bool==True:
         cliente=input("ingrese el nombre: ")
         print("Este es nuestro menú, Elige la opción de la que deseas realizar tu pedido: ")
         kameha=True
+        pedidos2=[]
         while kameha==True:
             menucomida()
             print("")
@@ -83,21 +84,18 @@ while bool==True:
                         if  a["nombre"]==nombre:
                             precio=a["precio"]
                             break
-                    estado=input("ingrese el estado de preparción")
-                  
                     if  nombre != a["nombre"]:
                         print("no se encuentra ningun producto")
-             
                     print("desea añadir algo más: si(si) no(no)")
                     cho=input()
                     if cho=="si":
                         eleccion=False
                         kameha=True
-                        
                     elif cho=="no":
                         print("regresando al menu principal....")
                         eleccion=False
                         kameha=False
+                    pedidos2.append({"categoria": categoria,"nombre":nombre,"precio":precio  })
                 if choose==2:
                     print("======PLATO FUERTE======")
                     for i in info[0]["plato_fuerte"]:
@@ -108,10 +106,8 @@ while bool==True:
                         if  a["nombre"]==nombre:
                             precio=a["precio"]
                             break
-                  
                     if  nombre != a["nombre"]:
                         print("no se encuentra ningun producto")
-             
                     print("desea añadir algo más: si(si) no(no)")
                     cho=input()
                     if cho=="si":
@@ -121,6 +117,7 @@ while bool==True:
                         print("regresando al menu principal....")
                         eleccion=False
                         kameha=False
+                    pedidos2.append({"categoria": categoria,"nombre":nombre,"precio":precio  })
                             
                 if choose==3:
                     print("======BEBIDAS======")
@@ -128,16 +125,12 @@ while bool==True:
                         print("-","nombre:",i["nombre"] ," " "precio:",i["precio"])
                     categoria="bebida"
                     nombre=input("ingrese el nombre del producto:")
-                    cantidad=input("cual es la cantidad adquirida: ")
                     for a in info[0]["bebida"]:
-                         if  a["nombre"]==nombre:
+                        if  a["nombre"]==nombre:
                             precio=a["precio"]
-                            print(precio)
                             break
-   
                     if  nombre != a["nombre"]:
                         print("no se encuentra ningun producto")
-             
                     print("desea añadir algo más: si(si) no(no)")
                     cho=input()
                     if cho=="si":
@@ -147,15 +140,17 @@ while bool==True:
                         print("regresando al menu principal....")
                         eleccion=False
                         kameha=False
-                        
+                    pedidos2.append({"categoria": categoria,"nombre":nombre,"precio":precio  })   
                 if choose==4:
                     print("")
                     print("regresando al menú principal...")
                     eleccion=False
                     kameha=False
-                datoss[0]["pedidos"].append({"cliente":cliente,"items":[{"categoria": categoria,"nombre":nombre,"precio":precio  }],"estado":estado})
-                guardarArchivo(datoss)         
-                print("Su registro a sido exitoso!")
+                    
+        estado=input("ingrese el estado del pedido: ")
+        datoss[0]["pedidos"].append({"cliente":cliente,"items":pedidos2, "estado":estado})
+        guardarArchivo(datoss)         
+        print("Su registro a sido exitoso!")
     if opc==2:#opción 2 esicion de pedido
         print("========EDITAR PEDIDOS===========")
         print("")
@@ -178,8 +173,6 @@ while bool==True:
                     newestado=input("ingresa el nuevo estado:" )
                     i["nuevo_estado"]=newestado
                     guardarArchivo(datoss)
-               
- 
                 
         if pcliente!=i["cliente"]:  
             print("")
@@ -197,7 +190,6 @@ while bool==True:
                 cliente=input("Ingrese el nombre del cliente: ")
                 valort=input("Ingrese el valor total de la compra: ")
                 Fecha=fecha_struct
-        
                 pago[0]["pagos"].append({"cliente":cliente, "total":valort, "fecha_pago":Fecha})
                 guardarArchivo(pago)         
                 print("Su registro a sido exitoso!")
@@ -215,9 +207,8 @@ while bool==True:
                     break
 
     if opc==4:#opcion de consulta de pedidos de manera individual o todo
-           
-           pedido=True
-           while pedido==True:
+        pedido=True
+        while pedido==True:
                 print("========CONSULTAR PEDIDOS===========")
                 print("Deseas ver todo los pedidos (all) o buscar alguno en especifico(other)")
                 ingre=input()
@@ -262,7 +253,5 @@ while bool==True:
         print("Tü has finalizado el programa")
         print("Cerrando programa...")
         bool=False
-       
 #Esto fue desarrollado por yurley botello     
-       
         

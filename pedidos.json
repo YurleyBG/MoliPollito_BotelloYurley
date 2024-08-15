@@ -101,12 +101,21 @@
                 "items": [
                     {
                         "categoria": "entrada",
-                        "nombre": "Empanadas Mini",
-                        "precio": 9000
+                        "nombre": "Papas Fritas",
+                        "precio": 5000
+                    },
+                    {
+                        "categoria": "plato_fuerte",
+                        "nombre": "Hamburguesa",
+                        "precio": 28000
+                    },
+                    {
+                        "categoria": "bebida",
+                        "nombre": "Coca-Cola",
+                        "precio": 3000
                     }
                 ],
-                "estado": "servido",
-                "nuevo_estado": " pagado"
+                "estado": "creado"
             }
         ]
     }
