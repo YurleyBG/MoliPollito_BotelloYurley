@@ -20,7 +20,7 @@ Deberas ejecutar el siguiente comando para clonar el repositorio y ver cada uno 
 Gith Bash
 
 ~~~ 
-git clone "link del repositorio" https://github.com/YurleyBG/TallerRepasop_BotelloYurley.git
+git clone "link del repositorio" https://github.com/YurleyBG/MoliPollito_BotelloYurley.git
 ~~~
 al hacer esto se descargará  los datos del repositorio. puedes usar visual studio code para correr cada uno de los códigos en la terminal.
 Recuerda tener instalado python en tu máquina local.
